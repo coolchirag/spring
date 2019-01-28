@@ -29,11 +29,11 @@
 		</dependency>
 		
 		<!-- Web with Tomcat + Embed -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
 
 		<!-- JSTL -->
 		<dependency>
@@ -45,23 +45,23 @@
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>provided</scope>
+			<!-- <scope>provided</scope> -->
 		</dependency>
 
 		<!-- Need this to compile JSP -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.eclipse.jdt.core.compiler</groupId>
 			<artifactId>ecj</artifactId>
 			<version>4.6.1</version>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Optional, for bootstrap -->
+		Optional, for bootstrap
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
 			<version>3.3.7</version>
-		</dependency>
+		</dependency> -->
 
 	</dependencies>
 	<build>
