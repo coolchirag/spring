@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -53,11 +54,13 @@ public class ThreadService {
 			e.printStackTrace();
 		}
 		
-		c.getEmployeeList().forEach(emp -> {
-			/* empRepo.save(emp); */
-			entityManager.merge(emp);
-			});
+		c.setEmployeeList(c.getEmployeeList().stream().map(emp -> {
+			return empRepo.getOne(emp.getId());
+			}).collect(Collectors.toList()));
+		//entityManager.joinTransaction();
+		
 		 System.out.println("Emp saved");
+		 
 		cmpRepo.save(c);
 		System.out.println("Done");
 	}

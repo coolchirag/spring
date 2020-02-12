@@ -21,7 +21,7 @@ public class TestController {
 	public ResponseEntity<String> testData()
 	{
 		String data = "hi";
-		
+		//cmpService.copyCompany1();
 		ts.test();
 		//String data = cmpService.insertCompany();
 		return new ResponseEntity<String>(data, HttpStatus.OK);
