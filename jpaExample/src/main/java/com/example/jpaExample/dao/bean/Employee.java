@@ -1,6 +1,5 @@
 package com.example.jpaExample.dao.bean;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "employee")
 //@Where(clause = " salary = 1000 ")
-public class Employee {
+public class Employee implements Cloneable {
 
 	@Id
 	@GeneratedValue(generator = "generator")
@@ -25,25 +24,20 @@ public class Employee {
 
 	@Column(name = "emp_name")
 	private String employeeName;
-	
+
 	@Column(name = "salary")
 	private Integer salary;
-	
+
 	@Column(name = "cmp_name")
 	private String cmpName;
-	
-	@Column(name="company_id")
-	//@Transient
+
+	@Column(name = "company_id", insertable = false, updatable = false)
+	// @Transient
 	private Integer companyId;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	//@Fetch(FetchMode.SELECT)
-	@JoinColumn(name="company_id", insertable = false, updatable = false)
-	//@Transient
-	//@Where(clause=" city = 'ahmedabad' ")
+
+	@ManyToOne /* (cascade = CascadeType.ALL) */  
+	@JoinColumn(name = "company_id")
 	private Company compnayToEmpMap;
-	
-	
 
 	public Integer getId() {
 		return id;
@@ -74,11 +68,8 @@ public class Employee {
 	}
 
 	public void setCompnayToEmpMap(Company compnayToEmpMap) {
-		//this.companyId = compnayToEmpMap.getId();
 		this.compnayToEmpMap = compnayToEmpMap;
 	}
-	
-	
 
 	public Integer getCompanyId() {
 		return companyId;
@@ -99,12 +90,13 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", employeeName=" + employeeName + ", salary=" + salary + ", cmpName=" + cmpName
-				+ ", companyId=" + companyId +"]";
+				+ ", companyId=" + companyId + "]";
 	}
 
-	
-	
-	
-	
-	
+	@Override
+	public Employee clone() throws CloneNotSupportedException {
+
+		return (Employee) super.clone();
+	}
+
 }

@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,7 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "company")
-public class Company {
+public class Company implements Cloneable {
 
 	@Id
 	@GeneratedValue(generator = "generator")
@@ -25,14 +26,14 @@ public class Company {
 
 	@Column(name = "name")
 	private String companyName;
-	
+
 	@Column(name = "city")
 	private String city;
-	
-	@OneToMany(mappedBy="compnayToEmpMap", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER)
+
+	/* @OneToMany(mappedBy = "compnayToEmpMap" , cascade = CascadeType.ALL ) */
+	@OneToMany  (cascade = CascadeType.ALL)
+	@JoinColumn(name = "company_id")
 	private List<Employee> employeeList;
-	
-	
 
 	public Integer getId() {
 		return id;
@@ -63,6 +64,11 @@ public class Company {
 	}
 
 	public void setEmployeeList(List<Employee> employeeList) {
+
+		/*
+		 * employeeList.forEach(emp -> { emp.setCompnayToEmpMap(this); });
+		 */
+
 		this.employeeList = employeeList;
 	}
 
@@ -71,7 +77,11 @@ public class Company {
 		return "Company [id=" + id + ", companyName=" + companyName + ", city=" + city + ", employeeList="
 				+ employeeList + "]";
 	}
-	
 
-		
+	@Override
+	public Company clone() throws CloneNotSupportedException {
+
+		return (Company) super.clone();
+	}
+
 }
