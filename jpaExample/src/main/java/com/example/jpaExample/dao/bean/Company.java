@@ -30,7 +30,7 @@ public class Company implements Cloneable {
 	@Column(name = "city")
 	private String city;
 
-	/* @OneToMany(mappedBy = "compnayToEmpMap" , cascade = CascadeType.ALL ) */
+	 //@OneToMany(mappedBy = "compnayToEmpMap" , cascade = CascadeType.ALL )
 	@OneToMany  (cascade = CascadeType.ALL)
 	@JoinColumn(name = "company_id")
 	private List<Employee> employeeList;
@@ -65,9 +65,9 @@ public class Company implements Cloneable {
 
 	public void setEmployeeList(List<Employee> employeeList) {
 
-		/*
-		 * employeeList.forEach(emp -> { emp.setCompnayToEmpMap(this); });
-		 */
+		
+		/* employeeList.forEach(emp -> { emp.setCompnayToEmpMap(this); }); */
+		 
 
 		this.employeeList = employeeList;
 	}

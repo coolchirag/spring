@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.jpaExample.dao.bean.Company;
-import com.example.jpaExample.dao.bean.CompanyRepository;
 import com.example.jpaExample.dao.bean.Employee;
+import com.example.jpaExample.dao.repository.CompanyRepository;
 
 @Service
 @Transactional

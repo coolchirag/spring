@@ -6,12 +6,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.jpaExample.dao.bean.Company;
-import com.example.jpaExample.dao.bean.CompanyRepository;
+import com.example.jpaExample.dao.bean.Employee;
+import com.example.jpaExample.dao.repository.CompanyRepository;
+import com.example.jpaExample.dao.repository.EmployeeRepository;
 
 @Service
 @Transactional
@@ -22,6 +27,11 @@ public class ThreadService {
 	
 	@Autowired
 	CompanyRepository cmpRepo;
+	@Autowired
+	EmployeeRepository empRepo;
+	
+	@PersistenceContext
+	EntityManager entityManager;
 	
 	public void test()
 	{
@@ -42,6 +52,12 @@ public class ThreadService {
 			
 			e.printStackTrace();
 		}
+		
+		c.getEmployeeList().forEach(emp -> {
+			/* empRepo.save(emp); */
+			entityManager.merge(emp);
+			});
+		 System.out.println("Emp saved");
 		cmpRepo.save(c);
 		System.out.println("Done");
 	}
